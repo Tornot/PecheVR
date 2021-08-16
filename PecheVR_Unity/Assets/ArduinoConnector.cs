@@ -27,7 +27,7 @@ public class ArduinoConnector : MonoBehaviour
         Open();
         StartCoroutine(AsynchronousReadFromArduino((string s) => Debug.Log(s),     // Callback
                                                             () => Debug.LogError("Error!"), // Error callback
-                                                            1000f));                          // Timeout (milliseconds)// 1 sec timeout
+                                                            1000f));                          // Timeout (milliseconds)// original = 1 sec timeout
     }
 
     // Update is called once per frame
@@ -45,7 +45,7 @@ public class ArduinoConnector : MonoBehaviour
     {
         // Opens the serial port
         stream = new SerialPort(port, baudrate);
-        stream.ReadTimeout = 50;
+        stream.ReadTimeout = 5; //Go from 50 to 5 to reduce performance issues
         stream.Open();
         //this.stream.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
     }

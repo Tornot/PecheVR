@@ -14,7 +14,7 @@ public class Reeling : MonoBehaviour
 
     
 
-    public float forceOnReeling = 1;
+    public float forceOnReeling = 0.8f;
 
     // Start is called before the first frame update
     void Start()

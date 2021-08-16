@@ -13,8 +13,9 @@ public class Fishing : MonoBehaviour
     public Rigidbody fishRigidbody;
     public Transform hook;
     public Transform playerTransform;
+    public GameObject arduino;
 
-    public float forceFromFish = 0.3f;
+    public float forceFromFish = 1.0f;
     public float minDistForFishing = 4.0f;//If distance between fish and player is less than this, player win
     private Vector3 fishStartPosition;
 
@@ -58,7 +59,7 @@ public class Fishing : MonoBehaviour
             else
             {
                 fishIsBiting = true;
-                print("time to reel!");
+                print("Time to reel!");
                
             }
         }
@@ -88,8 +89,10 @@ public class Fishing : MonoBehaviour
         {
             bobberTransform.transform.LookAt(fishingRodTipTransform);
             bobberRigidbody.AddForce(forceDirection.normalized * forceFromFish);
+            arduino.GetComponent<ArduinoConnector>().WriteToArduino("BACKWARD");
         }
-        
+        else arduino.GetComponent<ArduinoConnector>().WriteToArduino("STOP");
+
         //Place the fish on the hook
         fish.transform.LookAt(fishingRodTipTransform);
         fish.transform.position = hook.position + (forceDirection.normalized * 0.4f);
@@ -113,15 +116,17 @@ public class Fishing : MonoBehaviour
         line.x = -(fishingRodTipTransform.position.x - bobberTransform.position.x);
         line.y = -(fishingRodTipTransform.position.y - bobberTransform.position.y);
         line.z = -(fishingRodTipTransform.position.z - bobberTransform.position.z);
-        if (line.magnitude < minDistForFishing && isFishing && fishIsBiting)
+        //if (line.magnitude < minDistForFishing && isFishing && fishIsBiting)// We changed th condition
+        if (bobberTransform.position.x > -8.0f && isFishing && fishIsBiting)
         {
             //The player win, we save the information and reset fishing variables and bobber. This piece is executed one time
             playerWin = true;
             isFishing = false;
             fishIsBiting = false;
             resetBob.ResetBobber();
-
         }
+
+
         if (playerWin)
         {
             //Winning screen. This piece is executed every frame until playerWin variable is reset.

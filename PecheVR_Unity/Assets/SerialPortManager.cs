@@ -15,7 +15,7 @@ public class SerialPortManager : MonoBehaviour
         if (SerialComm)
         {
             stream = new SerialPort("COM4", 9600);  //!!!!!!!!!!!!!!!!!! Need to search and find the good COM port to use the Arduino!!!!!!!!!!!!!!!!!!!!!!
-            stream.ReadTimeout = 50;
+            stream.ReadTimeout = 5;
             stream.Open();
         }
 

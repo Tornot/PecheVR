@@ -1,8 +1,8 @@
 
-=== Tue Aug 10 17:23:51 2021
+=== Thu Mar  4 09:16:24 2021
 
 Packages were changed.
-Update Mode: resetToDefaultDependencies
+Update Mode: mergeDefaultDependencies
 
 The following packages were added:
   com.unity.collab-proxy@1.2.16
@@ -43,3 +43,11 @@ The following packages were added:
   com.unity.textmeshpro@2.1.1
   com.unity.timeline@1.2.17
   com.unity.ugui@1.0.0
+
+=== Wed Mar 17 09:38:57 2021
+
+Packages were changed.
+Update Mode: mergeDefaultDependencies
+
+The following packages were added:
+  com.unity.render-pipelines.universal@7.3.1
